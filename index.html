@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+   <title>Trivia</title>
+
+   <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="assets/js/bootstrap.min.js"></script>
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
+
+
+  <style type="text/css">
+  
+  </style>
+</head>
+<body>
+
+
+    <div class="container theme-showcase" role="main">
+
+      <!-- Standard button -->
+      <button type="button" id="startGame" class="btn btn-default">Start Game</button>
+
+      <div id="timer"></div>
+      <div id="message"></div>
+      <div id="question_holder"></div>
+      <div id="options"></div>
+
+      <form>
+
+
+      <div id="questionOne">
+          <div class="q1">1990</div>
+          <div class="q1">1984</div>
+          <div class="q1" id="true">1976</div>
+      </div>
+
+      <div id="questionTwo">
+          <div class="q1">a</div>
+          <div class="q1">b</div>
+          <div class="q1" id="true">c</div>
+      </div>
+
+
+
+      </form>
+
+ 
+    
+
+
+    </div> <!-- /container -->
+
+<script type="text/javascript">
+  $(document).ready(function(){
+
+    $('#questionOne').hide();
+    $('#questionTwo').hide();
+    $('#questionThree').hide();
+    $('#timer').hide();
+
+
+    var trivia = {
+        questions: [{
+          order: 1, // this index is zero
+          title : "A Tennessee man applied for a marriage license. It got rejected because he wanted to marry his:",
+          answer: "1966 Mustang",
+          options: ["His hunting dog", "1966 Mustang", "His horse" ],
+        }, //1st part
+        { 
+          order: 2, // this index is zero/
+          title : "In a Greek wedding, the best man's responsibility is what?:",
+          answer: "Pay for all the liquor at the wedding",
+          options: ["Pay for all the liquor at the wedding", "Pay for all the tuxedos the groomsmen wear", "Pay for the marriage license" ]
+        }] //2nd part
+      };//trivia
+
+    //console.log(trivia.questions[0].answer);
+
+    var correct = 0;
+    var incorrect = 0;
+    var count = 0;
+    var grabOptions = $("#options");
+    var intervalId; 
+    var timer = 30; 
+    var message = $('#message');
+
+    $('#timer').hide();
+    $("#timer").html("<h2> 0:30 </h2>"); //shows the timer
+
+
+  
+    var startGame = $('#startGame'); //get html start game button
+    $('#startGame').on("click", play); //on click run play function
+
+    function display(){
+      $("#question_holder").html(trivia.questions[count].title);
+      //console.log("trivia.questions[0].options.length");
+      //console.log(trivia.questions[0].options.length);
+
+      for(var i = 0; i < trivia.questions[0].options.length; i++){
+        var newDiv = $("<div>");
+        newDiv.html(trivia.questions[0].options[i]);
+        grabOptions.append(newDiv);
+        newDiv.attr("class", "check");
+        newDiv.attr("id", "q_" + [i]);
+
+
+      }// end for loop for 1st options
+
+      check();
+
+    }//end function display
+
+
+
+
+    function play() {
+      startGame.hide();
+      $('#timer').show();
+      intervalId = setInterval(decrement, 1000); // decrease time by 1 second
+
+      setTimeout(display, 50);
+
+      check();
+     
+
+    }// end play
+
+
+
+    function nextquestion() {
+    console.log("count -- next question");
+    console.log(count);
+    $('#options').empty();
+    count++;
+    console.log(trivia.questions[count].title);
+      
+      for (var i = 0; i < trivia.questions[i].options.length; i++)
+      {
+      $("#question_holder").html(trivia.questions[i].title);
+      $("q_"[count]).html(trivia.questions[count].options[i]);
+
+      }
+     
+
+      message.empty();
+    
+
+
+    console.log("count after added 1");
+    console.log(count);
+    if(count === trivia.questions.length ){
+      console.log("what is the questions length")
+      console.log(trivia.questions.length);
+      console.log("yes count and trivia length match");
+      count = 0; 
+    } else {
+        console.log("no count and trivia length don't match");
+        console.log("trivia.questions.length");
+        console.log(trivia.questions.length);
+   } 
+
+
+
+  }// end nextquestion
+
+
+  function check() {
+
+    // if times up and value empty show times up and the correct answer
+
+
+    $(".check").click(function(){
+      var answer = this.innerHTML;
+      console.log("check value of user answer");
+      console.log(answer); 
+      console.log("check which answer is showing in count")
+      console.log(trivia.questions[count].answer);
+
+
+
+       if (answer === trivia.questions[count].answer){
+        console.log("true");
+        stop();
+        message.html("Correct!");
+
+        // showw message correct
+        //correct++
+        setTimeout(nextquestion, 5000);
+       } else {
+          console.log("trivia.questions[count].answer");
+          console.log(trivia.questions[count].answer);
+          message.html("Sorry! The correct answer is " + trivia.questions[count].answer);
+          setTimeout(nextquestion, 5000);
+
+
+
+       }
+
+    });// end click function
+  }// end check function
+
+  
+
+  function decrement(){
+
+    timer--; //decrease 30secs by 1 sec
+    $("#timer").html("<h2>" + timer + "</h2>"); //shows the timer
+
+
+    if(timer === 0){
+      stop();
+     // console.log("times up"); 
+      $('#message').html("Time is Up!");
+
+
+      // add the process where it shows sorry times up and then shows the correct answer
+     }
+   }
+
+
+    function stop(){
+     clearInterval(intervalId);
+   }
+
+
+  });
+
+  
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+   <title>Trivia</title>
+
+   <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="assets/js/bootstrap.min.js"></script>
+
+
+  <style type="text/css">
+  
+  </style>
+</head>
+<body>
+
+
+    <div class="container theme-showcase" role="main">
+
+      <!-- Standard button -->
+      <button type="button" id="startGame" class="btn btn-default">Start Game</button>
+
+      <div id="timer"></div>
+      <div id="message"></div>
+      <div id="question_holder"></div>
+
+      <form>
+
+
+      <div id="questionOne">
+          <div class="q1">1990</div>
+          <div class="q1">1984</div>
+          <div class="q1" id="true">1976</div>
+      </div>
+
+      <div id="questionTwo">
+          <div class="q1">a</div>
+          <div class="q1">b</div>
+          <div class="q1" id="true">c</div>
+      </div>
+
+
+
+      </form>
+
+ 
+    
+
+
+    </div> <!-- /container -->
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+
+
+$('#questionOne').hide();
+ $('#questionTwo').hide();
+ $('#questionThree').hide();
+ $('#timer').hide();
+
+  var trivia = {
+      messages: "",
+      questions: [{
+        order: 1, // this index is zero
+        title : "A Tennessee man applied for a marriage license. It got rejected because he wanted to marry his:",
+        answer: "1966 Mustang",
+        options: ["His hunting dog", "1966 Mustang", "His horse" ],
+      }, {
+        order: 2, // this index is zero/
+        title : "In a Greek wedding, the best man's responsibility is what?:",
+        answer: "Pay for all the liquor at the wedding",
+        options: ["Pay for all the liquor at the wedding", "Pay for all the tuxedos the groomsmen wear", "Pay for the marriage license" ],
+      }]
+    };
+
+    // Step 1: Log the First Name below using console.log
+    //console.log(trivia.firstName);
+    // Step 2: Log the Last Name below using console.log
+    //console.log(trivia.lastName);
+    // Step 3: Log the State of the Address below using console.log
+    //console.log(trivia.address.state);
+    // Step 4: Log the Home Phone Number below using console.log
+    console.log(trivia.questions.title);
+    // Step 5: Log the Fax Number below using console.log
+    //console.log(trivia.questions[1].title);
+
+    var startGame = $('#startGame'); //start game button
+    var questionHolder = $('#question_holder');
+    var showImage;
+
+    var timer = 30; 
+    var intervalId; 
+    $('#timer').hide();
+    $("#timer").html("<h2> 0:30 </h2>"); //shows the timer
+
+    $('#startGame').on("click", play); //on click run play function
+
+    //var questionLength = trivia.questions.title.length;
+    //console.log(questionLength);
+
+    function play() {
+      startGame.hide();
+      $('#timer').show();
+
+
+      for (var i = 0; i < trivia.questions.title.length; i++){
+          $("#question_holder").html(trivia.questions.title[i]);
+      }
+
+
+    }
+
+
+
+ 
+
+
+  //var message; 
+  //var count = 0; 
+  
+
+
+
+
+
+
+ // function play(  ) {
+ //   startGame.hide();
+ //   $('#questionOne').show();
+ //   $('#timer').show();
+
+ //   questionHolder.html(questions[0]);
+
+ //   console.log(questions[0]);
+
+ //   intervalId = setInterval(decrement, 1000); // decrease time by 1 second
+//
+ //   check();
+ // }
+
+
+
+  //function check() {
+
+   // $('.q1').click(function() {
+//
+ //     var firstAnswer = this.innerHTML;
+ //     var message = $('#message');
+//      var trueanswer = $('#true').html();
+
+
+  //    for (var i = 0; i < questions.length; i++){
+
+   //     if(answers.indexOf(firstAnswer) > -1){
+   //       message.html("Correct!");
+    //      stop();
+    //      showImage = setInterval(nextquestion, 1000);
+
+ //        } else {
+    //       message.html("Sorry, the correct answer is " + trueanswer + "!");
+       //    stop();
+          // showImage = setInterval(nextquestion, 4000);
+
+         //} 
+
+       //}
+
+
+    //  console.log(firstAnswer);
+    //  var newMessage = $('<div>');
+
+    //  if(firstAnswer === "1976"){
+    //    newMessage.html("The Answer is 1976");
+     // } else {
+   //     newMessage.html("Sorry, Wrong Answer!");
+   //   }
+   //   message.html(newMessage);
+    //});
+
+
+
+
+   // $('#two').change(function() {
+   //   var secondAnswer = this.value;
+   //   console.log(secondAnswer);
+   // });
+
+  // }
+
+
+  
+   //function nextquestion() {
+   //  var message = $('#message');
+
+   //  count++;
+   //  for (var i = 0; i < questions.length; i++){
+    //   $("#question_holder").html(questions[i]);
+ //
+    //   if(questions[i] === )
+    // }
+
+    // message.empty();
+
+ //  }
+
+
+
+
+ //
+   //function decrement(){
+
+   //  timer--; //decrease 30secs by 1 sec
+    // $("#timer").html("<h2>" + timer + "</h2>"); //shows the timer
+
+
+
+   //  if(timer === 0){
+   //    stop();
+    //   console.log("times up"); 
+  //     $('#message').html("Time is Up!");
+
+
+      // add the process where it shows sorry times up and then shows the correct answer
+  //   }
+  // }
+
+
+
+  // function stop(){
+  //   clearInterval(intervalId);
+  // }
+
+
+
+});
+
+
+</script>
+
+
+
+
+  <script>
+
+
+
+
+ // var print =  $('#score').html();
+ // console.log("print");
+ // console.log(print);
+ //  for(var i = 0; i < score.length; i++){
+ //   totalScore += score[i] << 0;
+ //   console.log("totalScore");
+ //   console.log(totalScore);
+ //  } 
+
+//  }
+ //   addScore();
+</script>
+
+
+</body>
+
+</html>
